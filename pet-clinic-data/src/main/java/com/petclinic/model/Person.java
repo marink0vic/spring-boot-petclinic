@@ -1,7 +1,8 @@
 package com.petclinic.model;
 
-public class Person {
+public class Person extends BaseEntity {
 
+	private static final long serialVersionUID = 1L;
 	private String firstName;
 	private String lastName;
 	
