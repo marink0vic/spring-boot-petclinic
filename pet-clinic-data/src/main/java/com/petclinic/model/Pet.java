@@ -2,7 +2,7 @@ package com.petclinic.model;
 
 import java.time.LocalDate;
 
-public class Pet extends BaseEntity{
+public class Pet extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
 	private PetType petType;
