@@ -13,7 +13,7 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements 
 	// Ova metoda se samo nalazi u CrudService Interfejsu
 	@Override
 	public Owner save(Owner object) {
-		return super.save(object.getId(), object);
+		return super.save(object);
 	}
 	
 	//Ove ostale metode se nalaze i u AbstractServiceMap i u CrudService interfejsu
