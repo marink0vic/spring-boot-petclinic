@@ -8,7 +8,7 @@ import com.petclinic.model.PetType;
 import com.petclinic.services.PetTypeService;
 
 @Service
-public class PetTypeServiceMap extends AbstractMapService<PetType, Long> implements PetTypeService {
+public class PetTypeMapService extends AbstractMapService<PetType, Long> implements PetTypeService {
 
 	@Override
 	public Set<PetType> findAll() {

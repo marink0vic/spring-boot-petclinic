@@ -10,12 +10,12 @@ import com.petclinic.model.Vet;
 import com.petclinic.services.VetService;
 
 @Service
-public class VetServiceMap extends AbstractMapService<Vet, Long> implements VetService {
+public class VetMapService extends AbstractMapService<Vet, Long> implements VetService {
 	
-	private final SpecialtyServiceMap specialityServiceMap;
+	private final SpecialtyMapService specialityServiceMap;
 	
 	@Autowired
-	public VetServiceMap(SpecialtyServiceMap specialityServiceMap) {
+	public VetMapService(SpecialtyMapService specialityServiceMap) {
 		this.specialityServiceMap = specialityServiceMap;
 	}
 
