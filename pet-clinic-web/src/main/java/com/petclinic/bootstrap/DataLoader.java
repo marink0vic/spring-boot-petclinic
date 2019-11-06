@@ -11,11 +11,13 @@ import com.petclinic.model.Pet;
 import com.petclinic.model.PetType;
 import com.petclinic.model.Specialty;
 import com.petclinic.model.Vet;
+import com.petclinic.model.Visit;
 import com.petclinic.services.OwnerService;
 import com.petclinic.services.PetService;
 import com.petclinic.services.PetTypeService;
 import com.petclinic.services.SpecialtyService;
 import com.petclinic.services.VetService;
+import com.petclinic.services.VisitService;
 //kada spring bude potpuno spreman videce da ovaj bean implementira CommandLineRunner i pozvace metodu run
 @Component 
 public class DataLoader implements CommandLineRunner {
@@ -24,13 +26,16 @@ public class DataLoader implements CommandLineRunner {
 	private final VetService vetService;
 	private final PetTypeService petTypeService;
 	private final SpecialtyService specialtyService;
+	private final VisitService visitService;
 	
 	@Autowired
-	public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialtyService specialtyService) {
+	public DataLoader(OwnerService ownerService, VetService vetService, 
+					PetTypeService petTypeService, SpecialtyService specialtyService, VisitService visitService) {
 		this.ownerService = ownerService;
 		this.vetService = vetService;
 		this.petTypeService = petTypeService;
 		this.specialtyService = specialtyService;
+		this.visitService = visitService;
 	}
 
 
@@ -95,6 +100,13 @@ public class DataLoader implements CommandLineRunner {
         owner2.getPets().add(tonysPet);
 		
 		ownerService.save(owner2);
+		
+		Visit catVisit = new Visit();
+        catVisit.setPet(tonysPet);
+        catVisit.setDate(LocalDate.now());
+        catVisit.setDescription("Sneezy Kitty");
+
+        visitService.save(catVisit);
 		
 		System.out.println("Loaded Owners....");
 		
