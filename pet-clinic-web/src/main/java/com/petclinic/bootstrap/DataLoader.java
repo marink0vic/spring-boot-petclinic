@@ -1,6 +1,7 @@
 package com.petclinic.bootstrap;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -13,7 +14,6 @@ import com.petclinic.model.Specialty;
 import com.petclinic.model.Vet;
 import com.petclinic.model.Visit;
 import com.petclinic.services.OwnerService;
-import com.petclinic.services.PetService;
 import com.petclinic.services.PetTypeService;
 import com.petclinic.services.SpecialtyService;
 import com.petclinic.services.VetService;
@@ -69,19 +69,23 @@ public class DataLoader implements CommandLineRunner {
         dentistry.setDescription("dentistry");
         Specialty savedDentistry = specialtyService.save(dentistry);
 		
-		Owner owner1 = new Owner();
-		owner1.setFirstName("Michael");
-		owner1.setLastName("Daglas");
-		owner1.setAddress("123 Brickerel");
-        owner1.setCity("Miami");
-        owner1.setPhone("148-66-687");
+        Owner owner1 = Owner.builder()
+        					.firstName("Michael")
+        					.lastName("Daglas")
+        					.address("123 Brickerel")
+        					.city("Miami")
+        					.phone("146-88-66")
+        					.pets(new HashSet<>())
+        					.build();
         
         Pet mikesPet = new Pet();
         mikesPet.setPetType(savedDogPetType);
         mikesPet.setOwner(owner1);
         mikesPet.setBirthDate(LocalDate.now());
         mikesPet.setName("Rosco");
+        mikesPet.setVisits(new HashSet<>());
         owner1.getPets().add(mikesPet);
+        
 		
 		ownerService.save(owner1);
 		
@@ -91,12 +95,14 @@ public class DataLoader implements CommandLineRunner {
 		owner2.setAddress("44 Mapple Street");
         owner2.setCity("Toronto");
         owner2.setPhone("66-6-556");
+        owner2.setPets(new HashSet<>());
         
         Pet tonysPet = new Pet();
         tonysPet.setName("Zuca");
         tonysPet.setOwner(owner2);
         tonysPet.setBirthDate(LocalDate.now());
         tonysPet.setPetType(savedCatPetType);
+        tonysPet.setVisits(new HashSet<>());
         owner2.getPets().add(tonysPet);
 		
 		ownerService.save(owner2);
@@ -113,6 +119,7 @@ public class DataLoader implements CommandLineRunner {
 		Vet vet1 = new Vet();
 		vet1.setFirstName("Jesica");
 		vet1.setLastName("Andradge");
+		vet1.setSpecialties(new HashSet<>());
 		vet1.getSpecialties().add(savedDentistry);
 		vet1.getSpecialties().add(savedRadiology);
 		
@@ -121,6 +128,7 @@ public class DataLoader implements CommandLineRunner {
 		Vet vet2 = new Vet();
 		vet2.setFirstName("Leonardo");
 		vet2.setLastName("Da Vinci");
+		vet2.setSpecialties(new HashSet<>());
 		vet2.getSpecialties().add(savedSurgery);
 		
 		vetService.save(vet2);
