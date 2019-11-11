@@ -20,7 +20,7 @@ public class OwnerSDJpaService implements OwnerService {
 	private final OwnerRepository ownerRepository;
 
 	@Autowired
-	public OwnerSDJpaService(OwnerRepository ownerRepository, PetRepository petRepository) {
+	public OwnerSDJpaService(OwnerRepository ownerRepository) {
 		this.ownerRepository = ownerRepository;
 	}
 
