@@ -1,5 +1,7 @@
 package com.petclinic.services.map;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -79,5 +81,22 @@ public class OwnerMapService extends AbstractMapService<Owner, Long> implements 
 					.filter(o -> o.getLastName().equalsIgnoreCase(lastName))
 					.findFirst()
 					.orElse(null);
+	}
+
+	@Override
+	public List<Owner> findAllByLastNameLike(String lastName) {
+		String temp = lastName.substring(1, lastName.length() - 1);
+		if (temp.isEmpty()) {
+			return new ArrayList<>(this.findAll());
+		}
+		
+		List<Owner> owners = new ArrayList<>();
+		
+		this.findAll()
+			.stream()
+			.filter(owner -> owner.getLastName().contains(temp))
+			.forEach(owners::add);
+		
+		return owners;
 	}
 }
