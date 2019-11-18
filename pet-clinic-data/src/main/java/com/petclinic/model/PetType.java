@@ -17,12 +17,17 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 @Table(name = "types")
 public class PetType extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
+	
+	@Builder
+    public PetType(Long id, String name) {
+        super(id);
+        this.name = name;
+    }
 	
 	@Column(name = "name")
 	private String name;
